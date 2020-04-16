@@ -53,22 +53,22 @@
           <?php if ($pageFlag === 1): ?>
             <h1>確認画面</h1>
             <form action="index.php" method="post">
-                氏名
-                <?php echo $_POST['name']; ?>
-                <br>
-                メールアドレス
-                <?php echo $_POST['email']; ?>
-                <br>
-                性別
-                <?php
-                  if($_POST['gender'] === '0') { echo '男性'; }
-                  if($_POST['gender'] === '1') { echo '女性'; }
-                ?>
-                <br>
-                <input type="submit" value='戻る' class="btn btn-danger">
-                <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
-                <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
-                <input type="submit" name="btn_submit" value="送信する" class="btn btn-primary">
+              氏名
+              <?php echo $_POST['name']; ?>
+              <br>
+              メールアドレス
+              <?php echo $_POST['email']; ?>
+              <br>
+              性別
+              <?php
+                if($_POST['gender'] === '0') { echo '男性'; }
+                if($_POST['gender'] === '1') { echo '女性'; }
+              ?>
+              <br>
+              <input type="submit" value='戻る' class="btn btn-danger">
+              <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
+              <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+              <input type="submit" name="btn_submit" value="送信する" class="btn btn-primary">
             </form>
           <?php endif; ?>
           <?php if ($pageFlag === 2): ?>
