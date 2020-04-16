@@ -1,6 +1,15 @@
 <?php
-  $pageFlag = 0;
+  echo '<pre>';
+  var_dump($_POST);
+  echo '</pre>';
 
+  $pageFlag = 0;
+  if (!(empty($_POST['btn_confirm']))){
+    $pageFlag = 1;
+  }
+  if(!(empty($_POST['btn_submit']))){
+    $pageFlag = 2;
+  }
 ?>
 
 <!doctype html>
@@ -16,18 +25,55 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
-
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
-          <form action="index.php" method="post">
-            <div class="form-group">
-              <label for="name">氏名</label>
-              <input type="text" name="name" id="" class="form-control">
-              <button type="submit" class="btn btn-primary">送信</button>
-            </div>
-          </form>
+        <div class="col-md-8 mx-auto">
+          <?php if ($pageFlag === 0): ?>
+            <h1>入力画面</h1>
+            <form action="index.php" method="post">
+              <div class="form-group">
+                <label for="name">氏名</label>
+                <input type="text" name="name" id="" class="form-control" value="<?php echo $_POST['name']; ?>">
+              </div>
+              <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="text" name="email" id="" class="form-control" value="<?php echo $_POST['email']; ?>">
+              </div>
+              <div class="form-check form-check-inline"">性別：
+                <input type="radio"" name="gender" id="gender1" class=" form-check-input" value="0">
+                <label class=" form-check-label" for="gender1"> 男性 </label>
+                <input type="radio"" name="gender" id="gender2" class=" form-check-input" value="1">
+                <label class=" form-check-label" for="gender2">女性</label>
+              </div>
+              <div class="form-group">
+                <input type="submit" name="btn_confirm" value="確認する" class="btn btn-primary">
+              </div>
+            </form>
+          <?php endif; ?>
+          <?php if ($pageFlag === 1): ?>
+            <h1>確認画面</h1>
+            <form action="index.php" method="post">
+                氏名
+                <?php echo $_POST['name']; ?>
+                <br>
+                メールアドレス
+                <?php echo $_POST['email']; ?>
+                <br>
+                性別
+                <?php
+                  if($_POST['gender'] === '0') { echo '男性'; }
+                  if($_POST['gender'] === '1') { echo '女性'; }
+                ?>
+                <br>
+                <input type="submit" value='戻る' class="btn btn-danger">
+                <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
+                <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+                <input type="submit" name="btn_submit" value="送信する" class="btn btn-primary">
+            </form>
+          <?php endif; ?>
+          <?php if ($pageFlag === 2): ?>
+            <h1>送信が完了しました。</h1>
+          <?php endif; ?>
         </div>
       </div>
     </div>
